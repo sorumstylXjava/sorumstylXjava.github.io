@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java_nih_deks.dev — Android System Tweaks & Performance Tools</title>
+    <meta name="description" content="Free Android performance tools and system modifications. Root and Non-Root support via Shizuku. Download XianTian Pro and other releases by Java_nih_deks.">
+    <meta name="author" content="Java_nih_deks">
+    
+    <!-- Standard Developer Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        background: '#09090b',
+                        surface: '#18181b',
+                        border: '#27272a',
+                        textMain: '#e4e4e7',
+                        textMuted: '#a1a1aa',
+                        accent: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #09090b; color: #e4e4e7; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        .fade-in { animation: fadeIn 0.2s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .ad-slot { width: 100%; background-color: #121214; border: 1px dashed #3f3f46; display: flex; align-items: center; justify-content: center; color: #71717a; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-accent/30">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div class="max-w-5xl mx-auto px-5 lg:px-0 h-16 flex items-center justify-between gap-8">
+            <button onclick="showPage('home')" class="text-white font-semibold tracking-tight text-lg flex items-center gap-2 hover:opacity-80 transition whitespace-nowrap">
+                <i class="fa-solid fa-terminal text-textMuted text-sm"></i>
+                Java_nih_deks<span class="text-textMuted font-normal">.dev</span>
+            </button>
+            <div class="flex items-center gap-5 md:gap-8 text-sm font-medium text-textMuted whitespace-nowrap">
+                <button onclick="showPage('home')" class="hover:text-white transition">Home</button>
+                <button onclick="showPage('about')" class="hover:text-white transition">About</button>
+                <a href="https://t.me/Java_diks" target="_blank" class="text-textMuted hover:text-[#229ED9] transition">
+                    <i class="fa-brands fa-telegram text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-5 lg:px-0 py-10 w-full">
+
+        <!-- HOME PAGE -->
+        <div id="home-page" class="fade-in">
+            <header class="mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight">Projects & Releases</h1>
+                <p class="text-textMuted text-base max-w-2xl leading-relaxed">
+                    Repositori resmi modifikasi sistem Android. Mendukung Root & Non-Root (via Shizuku).
+                </p>
+            </header>
+
+            <div class="ad-slot h-[90px] mb-8">[ Iklan Header ]</div>
+
+            <div id="module-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+            <div class="ad-slot h-[250px] mt-12">[ Iklan Footer ]</div>
+        </div>
+
+        <!-- DETAIL PAGE -->
+        <div id="detail-page" class="hidden fade-in max-w-3xl mx-auto">
+            <button onclick="showPage('home')" class="text-textMuted hover:text-white flex items-center gap-2 text-sm font-medium mb-6 transition">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Home
+            </button>
+
+            <article class="bg-surface border border-border rounded-lg overflow-hidden shadow-sm">
+                <div id="banner-container" class="w-full bg-[#111] border-b border-border hidden">
+                    <img id="detail-banner" src="" alt="Banner" class="w-full h-48 md:h-64 object-cover">
+                </div>
+
+                <div class="p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-4 font-mono text-xs">
+                        <span id="detail-version" class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded"></span>
+                        <span id="detail-type" class="bg-zinc-800 text-zinc-300 border border-zinc-700 px-2.5 py-1 rounded"></span>
+                    </div>
+
+                    <h1 id="detail-title" class="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight"></h1>
+                    <p id="detail-short-desc" class="text-textMuted leading-relaxed mb-8 pb-8 border-b border-border"></p>
+
+                    <div class="ad-slot h-[100px] mb-8">[ Iklan Tengah ]</div>
+
+                    <section class="mb-10">
+                        <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-textMuted text-sm"></i> Fitur & Log Perubahan
+                        </h2>
+                        <ul id="detail-features" class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-sm text-textMuted"></ul>
+                    </section>
+
+                    <section id="notes-container" class="mb-10 hidden">
+                        <div class="bg-background border-l-2 border-yellow-500/50 p-4 rounded-r">
+                            <span class="font-mono text-xs text-yellow-500/80 font-semibold uppercase">Catatan Dev</span>
+                            <ul id="detail-notes" class="text-sm text-textMuted space-y-1 list-disc list-inside mt-2"></ul>
+                        </div>
+                    </section>
+
+                    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 pt-8 border-t border-border">
+                        <div id="credits-container" class="hidden text-sm text-textMuted">
+                            <h3 class="text-xs font-mono uppercase mb-3">Kredit</h3>
+                            <ul id="detail-credits" class="space-y-1"></ul>
+                        </div>
+                        <div id="thanks-container" class="hidden text-sm text-textMuted">
+                            <h3 class="text-xs font-mono uppercase mb-3">Terima Kasih</h3>
+                            <p id="detail-thanks" class="italic"></p>
+                        </div>
+                    </section>
+
+                    <section class="mb-10">
+                        <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-code text-textMuted text-sm"></i> Cara Instalasi
+                        </h2>
+                        <div class="bg-background border border-border rounded-md p-5">
+                            <ol id="detail-install" class="list-decimal list-inside space-y-2 text-sm text-textMuted font-mono"></ol>
+                        </div>
+                    </section>
+
+                    <!-- Tombol Download dengan Timer -->
+                    <div class="flex flex-col gap-4">
+                        <button id="download-btn" onclick="startDownloadTimer()" class="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 transition-colors font-semibold text-sm py-4 px-8 rounded-md w-full sm:w-max">
+                            <i class="fa-solid fa-download"></i> Download Release
+                        </button>
+                        <p id="timer-msg" class="text-xs text-textMuted hidden">Mohon tunggu sebentar, menyiapkan tautan...</p>
+                    </div>
+
+                    <div class="ad-slot h-[180px] mt-12">[ Iklan Bawah ]</div>
+                </div>
+            </article>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="about-page" class="hidden fade-in max-w-2xl">
+            <h1 class="text-3xl font-bold text-white mb-6 tracking-tight">About</h1>
+            <div class="bg-surface border border-border p-6 md:p-8 rounded-lg text-textMuted text-sm leading-relaxed">
+                <p class="mb-4"><strong>Java_nih_deks.dev</strong> adalah pengembang independen yang berfokus pada alat optimasi sistem Android.</p>
+                <p class="mb-8">Semua proyek di sini bertujuan untuk memberikan kontrol lebih dalam kepada pengguna tanpa kerumitan yang tidak perlu.</p>
+                <hr class="border-border mb-6">
+                <h3 class="text-white font-medium mb-4 text-xs uppercase tracking-widest">Hubungi Kami</h3>
+                <a href="https://t.me/Java_diks" target="_blank" class="inline-flex items-center gap-2 bg-background border border-border px-4 py-2 rounded-md hover:text-white transition">
+                    <i class="fa-brands fa-telegram text-blue-400"></i> t.me/Java_diks
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-border mt-auto bg-background">
+        <div class="max-w-5xl mx-auto px-5 lg:px-0 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-textMuted font-mono">
+            <div>&copy; 2026 Java_nih_deks.dev</div>
+            <div class="flex items-center gap-6">
+                <a href="https://t.me/Java_diks" class="hover:text-white transition">Telegram Community</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const modulesData = [
+            {
+                id: 'xiantian-pro-83',
+                title: 'XianTian Pro',
+                version: 'v8.3',
+                type: 'App (Root / Shizuku)',
+                bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/IMG_20260311_092033_320.jpg',
+                shortDesc: 'Aplikasi optimasi sistem tingkat lanjut. Mendukung Root dan Non-Root melalui integrasi Shizuku.',
+                icon: 'fa-microchip',
+                features: [
+                    'Update FPS Monitor (Root)', 'Info CPU', 'UI Baru', 'Mendukung Non-Root',
+                    'Downscale (R/NR)', 'Driver Grafis', 'Kurangi Logging & Tracing',
+                    'Profil Performa (Root)', 'Optimasi Preload', 'Smart Cache Cleaner',
+                    'Respon Sentuhan', 'Kill Apps Latar Belakang', 'Render GPU 2D',
+                    'Skala Animasi', 'Mode Game Prioritas', 'Matikan Thermal',
+                    'Penjadwal IO', 'Tweak Memori VM', 'LMK Agresif', 'Latensi Rendah TCP',
+                    'Kunci FPS', 'Tab GameBoost', 'Dan fitur lainnya...'
+                ],
+                notes: ['Fitur Non-Root ada di bagian AppProfile', 'GameBoost juga mendukung optimasi tanpa root'],
+                credits: ['@AduhaiWelewele','@HoyoSlave','@Nekotor1999','@anomaly_arc','@Shemywifee'],
+                specialThanks: '@zuanvfx01 — Terima kasih atas bantuannya.',
+                install: [
+                    'Unduh file APK dari link rilis.',
+                    'Instal APK di perangkat Anda.',
+                    'Non-Root: Sambungkan via Shizuku.',
+                    'Root: Berikan izin Superuser.',
+                    'Dan enjoy the apps,thank you for using my application'
+                ],
+                downloadLink: 'https://sfl.gl/kj0qG' 
+            }
+        ];
+
+        let currentDownloadUrl = "";
+
+        function renderHome() {
+            const grid = document.getElementById('module-grid');
+            grid.innerHTML = ''; 
+            modulesData.forEach(mod => {
+                const card = document.createElement('div');
+                card.className = 'group bg-surface border border-border p-5 rounded-lg hover:border-zinc-600 transition-colors cursor-pointer flex flex-col';
+                card.onclick = () => openDetail(mod.id); 
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded bg-background border border-border flex items-center justify-center text-textMuted group-hover:text-white transition-colors">
+                            <i class="fa-solid ${mod.icon}"></i>
+                        </div>
+                        <span class="font-mono text-[10px] bg-zinc-800 text-zinc-300 px-2 py-1 rounded uppercase tracking-wider">${mod.type}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1 tracking-tight">${mod.title} <span class="text-blue-400 font-mono text-xs font-normal">${mod.version}</span></h3>
+                    <p class="text-sm text-textMuted mb-6 flex-grow leading-relaxed line-clamp-2">${mod.shortDesc}</p>
+                    <div class="mt-auto pt-4 border-t border-border flex items-center text-xs font-medium text-textMuted group-hover:text-white transition-colors uppercase tracking-widest">
+                        Lihat Detail <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function startDownloadTimer() {
+            const btn = document.getElementById('download-btn');
+            const msg = document.getElementById('timer-msg');
+            let timeLeft = 10;
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            msg.classList.remove('hidden');
+
+            const timer = setInterval(() => {
+                btn.innerHTML = `<i class="fa-solid fa-hourglass-half animate-spin"></i> Menyiapkan (${timeLeft}s)`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Klik untuk Download`;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    btn.onclick = () => { window.open(currentDownloadUrl, '_blank'); };
+                    window.open(currentDownloadUrl, '_blank'); 
+                }
+            }, 1000);
+        }
+
+        function openDetail(id) {
+            const mod = modulesData.find(m => m.id === id);
+            if (!mod) return;
+
+            currentDownloadUrl = mod.downloadLink;
+            
+            const btn = document.getElementById('download-btn');
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.innerHTML = `<i class="fa-solid fa-download"></i> Download Release`;
+            btn.onclick = startDownloadTimer;
+            document.getElementById('timer-msg').classList.add('hidden');
+
+            const bannerImg = document.getElementById('detail-banner');
+            if (mod.bannerImg) {
+                bannerImg.src = mod.bannerImg;
+                document.getElementById('banner-container').classList.remove('hidden');
+            } else {
+                document.getElementById('banner-container').classList.add('hidden');
+            }
+
+            document.getElementById('detail-title').innerText = mod.title;
+            document.getElementById('detail-version').innerText = mod.version;
+            document.getElementById('detail-type').innerText = mod.type;
+            document.getElementById('detail-short-desc').innerText = mod.shortDesc;
+            document.getElementById('detail-features').innerHTML = mod.features.map(f => `<li class="flex items-start gap-2"><span>-</span> <span>${f}</span></li>`).join('');
+            
+            const nts = document.getElementById('notes-container');
+            if (mod.notes?.length) { nts.classList.remove('hidden'); document.getElementById('detail-notes').innerHTML = mod.notes.map(n => `<li>${n}</li>`).join(''); } 
+            else { nts.classList.add('hidden'); }
+
+            const crd = document.getElementById('credits-container');
+            if (mod.credits?.length) { crd.classList.remove('hidden'); document.getElementById('detail-credits').innerHTML = mod.credits.map(c => `<li>${c}</li>`).join(''); } 
+            else { crd.classList.add('hidden'); }
+
+            const thx = document.getElementById('thanks-container');
+            if (mod.specialThanks) { thx.classList.remove('hidden'); document.getElementById('detail-thanks').innerText = mod.specialThanks; } 
+            else { thx.classList.add('hidden'); }
+
+            document.getElementById('detail-install').innerHTML = mod.install.map(step => `<li>${step}</li>`).join('');
+            
+            showPage('detail');
+            window.scrollTo(0, 0); 
+        }
+
+        function showPage(pageId) {
+            ['home', 'detail', 'about'].forEach(p => document.getElementById(`${p}-page`).classList.add('hidden'));
+            document.getElementById(`${pageId}-page`).classList.remove('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', renderHome);
+    </script>
+</body>
+</html>
+
