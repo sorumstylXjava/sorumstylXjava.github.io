@@ -34,7 +34,7 @@
             --green-border: #bbf7d0; --red: #dc2626; --yellow: #d97706; --yellow-light: #fffbeb;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-            --radius: 8px;
+            --radius: 18px;
         }
         html { scroll-behavior: smooth; }
         body { background: var(--bg-gray); color: var(--text-body); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
@@ -89,9 +89,9 @@
         .mobile-search input::placeholder { color: var(--text-faint); }
         .mobile-search input:focus { border-color: var(--blue); }
         #module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
-        .module-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s; display: flex; flex-direction: column; user-select: none; box-shadow: var(--shadow-sm); }
-        .module-card:hover { border-color: var(--blue); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-        .module-card:active { transform: translateY(0); }
+        .module-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s; display: flex; flex-direction: column; user-select: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04); }
+        .module-card:hover { border-color: var(--blue-border); box-shadow: 0 8px 28px rgba(37,99,235,0.13), 0 2px 8px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .module-card:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
         .card-icon-wrap { width: 42px; height: 42px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 1rem; transition: background 0.15s; }
         .module-card:hover .card-icon-wrap { background: var(--blue); color: #fff; }
