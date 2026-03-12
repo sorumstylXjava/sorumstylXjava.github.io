@@ -4,20 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java_nih_deks — Android System Tweaks & Performance Tools</title>
-    <meta name="description" content="Free Android performance tools and system modification Download and other releases. Supports Root and Non-Root">
-    <meta name="keywords" content="android tweak, android performance, shizuku, root android, system optimization, apk, fps boost, android tools free">
+    <meta name="description" content="Free Android performance tools and system modification downloads. Supports Root and Non-Root via Shizuku. Official release hub by Java_nih_deks.">
+    <meta name="keywords" content="android tweak, android performance, shizuku, root android, system optimization, apk, fps boost, android tools free, magisk module, kernelsu">
     <meta name="author" content="Java_nih_deks">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://sorumstylxjava.github.io/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sorumstylxjava.github.io/">
     <meta property="og:title" content="Java_nih_deks — Android System Tweaks & Performance Tools">
-    <meta property="og:description" content="Free Android performance tools. Root & Non-Root">
+    <meta property="og:description" content="Free Android performance tools. Root & Non-Root support. Official release hub.">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Java_nih_deks">
     <meta name="twitter:description" content="Free Android performance tools. Root & Non-Root support.">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Java_nih_deks","url":"https://sorumstylxjava.github.io/","description":"Android system modification and performance tools","author":{"@type":"Person","name":"Java_nih_deks"}}</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Java_nih_deks",
+        "url": "https://sorumstylxjava.github.io/",
+        "description": "Android system modification and performance tools — free releases for Root and Non-Root users.",
+        "author": { "@type": "Person", "name": "Java_nih_deks" },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://sorumstylxjava.github.io/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5565071752876543" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +39,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; outline: none !important; -webkit-tap-highlight-color: transparent; }
-        :focus-visible { outline: 2px solid #2563eb !important; outline-offset: 2px; }
+        :focus-visible { outline: 2px solid var(--blue) !important; outline-offset: 2px; }
         :root {
             --bg: #ffffff; --bg-gray: #f8fafc; --bg-hover: #f1f5f9; --surface: #ffffff;
             --border: #e2e8f0; --border-mid: #cbd5e1; --text: #0f172a; --text-body: #334155;
@@ -36,21 +50,29 @@
             --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
             --radius: 18px;
         }
+        [data-theme="dark"] {
+            --bg: #0f172a; --bg-gray: #1e293b; --bg-hover: #334155; --surface: #1e293b;
+            --border: #334155; --border-mid: #475569; --text: #f1f5f9; --text-body: #cbd5e1;
+            --text-dim: #94a3b8; --text-faint: #64748b; --blue: #3b82f6; --blue-hover: #2563eb;
+            --blue-light: #1e3a5f; --blue-border: #1d4ed8; --green: #22c55e; --green-light: #052e16;
+            --green-border: #166534; --yellow: #f59e0b; --yellow-light: #1c1103;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3); --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+        }
         html { scroll-behavior: smooth; }
-        body { background: var(--bg-gray); color: var(--text-body); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+        body { background: var(--bg-gray); color: var(--text-body); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-gray); }
         ::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
-        nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 200; box-shadow: var(--shadow-sm); }
+        nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 200; box-shadow: var(--shadow-sm); transition: background 0.2s, border-color 0.2s; }
         .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-        .logo { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); cursor: pointer; user-select: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .logo { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); cursor: pointer; user-select: none; display: flex; align-items: center; gap: 8px; white-space: nowrap; text-decoration: none; }
         .logo-icon { width: 30px; height: 30px; background: var(--blue); border-radius: 7px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.75rem; flex-shrink: 0; }
         .nav-search { flex: 1; max-width: 380px; position: relative; }
         .nav-search i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 0.8rem; pointer-events: none; }
-        .nav-search input { width: 100%; background: var(--bg-gray); border: 1px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--text); padding: 8px 12px 8px 34px; transition: border-color 0.15s, box-shadow 0.15s; }
+        .nav-search input { width: 100%; background: var(--bg-gray); border: 1px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--text); padding: 8px 12px 8px 34px; transition: border-color 0.15s, box-shadow 0.15s, background 0.2s; }
         .nav-search input::placeholder { color: var(--text-faint); }
-        .nav-search input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); background: #fff; }
+        .nav-search input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); background: var(--surface); }
         @media (max-width: 640px) { .nav-search { display: none; } }
         .nav-links { display: flex; align-items: center; gap: 4px; }
         .nav-btn { font-size: 0.82rem; font-weight: 400; color: var(--text-dim); background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: background 0.15s, color 0.15s; font-family: 'DM Sans', sans-serif; white-space: nowrap; text-decoration: none; display: flex; align-items: center; gap: 6px; }
@@ -58,6 +80,8 @@
         .nav-btn.active { background: var(--blue-light); color: var(--blue); font-weight: 500; }
         .nav-tg { color: var(--blue) !important; font-size: 1.1rem !important; padding: 6px 8px !important; }
         .nav-tg:hover { background: var(--blue-light) !important; }
+        .dark-toggle { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-gray); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: all 0.15s; flex-shrink: 0; }
+        .dark-toggle:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-mid); }
         main { flex: 1; max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; width: 100%; }
         .ad-slot { width: 100%; background: var(--surface); border: 1px dashed var(--border-mid); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; }
         .page { animation: pgIn 0.2s ease; }
@@ -69,7 +93,7 @@
         .badge-gray   { color: var(--text-dim); background: var(--bg-gray);     border-color: var(--border); }
         .badge-yellow { color: var(--yellow);  background: var(--yellow-light); border-color: #fde68a; }
         .badge-tag    { color: var(--text-dim); background: var(--bg-gray);     border-color: var(--border); }
-        .hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; box-shadow: var(--shadow-sm); }
+        .hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; box-shadow: var(--shadow-sm); transition: background 0.2s, border-color 0.2s; }
         .hero-left { flex: 1; }
         .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; }
         .hero-desc { color: var(--text-dim); font-size: 0.88rem; line-height: 1.8; max-width: 480px; margin-bottom: 16px; }
@@ -79,10 +103,13 @@
         .hero-stat span { font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
         .hero-right { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
         @media (max-width: 600px) { .hero { flex-direction: column; align-items: flex-start; } .hero-right { align-items: flex-start; } }
-        .filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: space-between; }
+        .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .filter-btn { font-size: 0.8rem; font-weight: 400; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
         .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
         .filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); font-weight: 500; }
+        .sort-select { font-size: 0.8rem; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 28px 6px 10px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.15s; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+        .sort-select:focus { border-color: var(--blue); outline: none; }
         .mobile-search { display: none; position: relative; margin-bottom: 20px; }
         @media (max-width: 640px) { .mobile-search { display: block; } }
         .mobile-search i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 0.8rem; pointer-events: none; }
@@ -90,7 +117,7 @@
         .mobile-search input::placeholder { color: var(--text-faint); }
         .mobile-search input:focus { border-color: var(--blue); }
         #module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
-        .module-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s; display: flex; flex-direction: column; user-select: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04); }
+        .module-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s, background 0.2s; display: flex; flex-direction: column; user-select: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04); }
         .module-card:hover { border-color: var(--blue-border); box-shadow: 0 8px 28px rgba(37,99,235,0.13), 0 2px 8px rgba(0,0,0,0.06); transform: translateY(-2px); }
         .module-card:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
@@ -98,14 +125,15 @@
         .module-card:hover .card-icon-wrap { background: var(--blue); color: #fff; }
         .card-title { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
         .card-version { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--blue); background: var(--blue-light); border: 1px solid var(--blue-border); padding: 1px 7px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
-        .card-desc { font-size: 0.84rem; color: var(--text-dim); line-height: 1.75; flex-grow: 1; margin-bottom: 16px; }
+        .card-desc { font-size: 0.84rem; color: var(--text-dim); line-height: 1.75; flex-grow: 1; margin-bottom: 10px; }
+        .card-date { font-size: 0.72rem; color: var(--text-faint); display: flex; align-items: center; gap: 5px; margin-bottom: 14px; }
         .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); }
         .card-meta { display: flex; gap: 6px; flex-wrap: wrap; }
         .card-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 500; color: var(--blue); transition: gap 0.15s; }
         .module-card:hover .card-cta { gap: 9px; }
         #no-results { text-align: center; padding: 48px 0; color: var(--text-dim); font-size: 0.9rem; display: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
         #no-results i { font-size: 2rem; color: var(--text-faint); display: block; margin-bottom: 12px; }
-        .updates-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); }
+        .updates-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); transition: background 0.2s, border-color 0.2s; }
         .updates-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
         .updates-title { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); }
         .update-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
@@ -118,9 +146,13 @@
         .update-meta { font-size: 0.75rem; color: var(--text-faint); display: flex; gap: 10px; }
         .back-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 0.82rem; font-weight: 500; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 7px 14px; cursor: pointer; margin-bottom: 20px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
         .back-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+        .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-faint); margin-bottom: 16px; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--blue); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb i { font-size: 0.6rem; }
         .detail-layout { display: grid; grid-template-columns: 1fr 280px; gap: 20px; align-items: start; }
         @media (max-width: 768px) { .detail-layout { grid-template-columns: 1fr; } }
-        .detail-main { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+        .detail-main { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: background 0.2s, border-color 0.2s; }
         .banner-wrap { width: 100%; background: var(--bg-gray); border-bottom: 1px solid var(--border); }
         .banner-placeholder { width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 2rem; }
         .detail-body { padding: 28px 28px 32px; }
@@ -155,7 +187,7 @@
         .btn-primary:disabled { background: var(--text-faint); cursor: not-allowed; box-shadow: none; transform: none; }
         .timer-note { font-size: 0.78rem; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
         .detail-sidebar { display: flex; flex-direction: column; gap: 16px; }
-        .sidebar-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm); }
+        .sidebar-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm); transition: background 0.2s, border-color 0.2s; }
         .sidebar-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
         .info-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
         .info-row:last-child { border-bottom: none; padding-bottom: 0; }
@@ -170,49 +202,65 @@
         .share-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 0.78rem; font-weight: 500; padding: 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-gray); color: var(--text-dim); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; text-decoration: none; }
         .share-btn:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
         .about-wrap { max-width: 720px; }
-        .about-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+        .about-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); margin-bottom: 16px; transition: background 0.2s, border-color 0.2s; }
         .about-card h2 { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
         .about-card p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.9; margin-bottom: 14px; }
         .about-card p:last-child { margin-bottom: 0; }
         .about-card strong { color: var(--text); font-weight: 500; }
         .connect-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 500; color: var(--blue); background: var(--blue-light); border: 1px solid var(--blue-border); border-radius: 8px; padding: 9px 18px; text-decoration: none; transition: all 0.15s; margin-top: 4px; }
         .connect-btn:hover { background: var(--blue); color: #fff; }
-        footer { background: var(--surface); border-top: 1px solid var(--border); padding: 20px 24px; }
+        .faq-item { border-bottom: 1px solid var(--border); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text); gap: 12px; }
+        .faq-q i { color: var(--text-faint); font-size: 0.8rem; transition: transform 0.2s; flex-shrink: 0; }
+        .faq-item.open .faq-q i { transform: rotate(180deg); color: var(--blue); }
+        .faq-item.open .faq-q { color: var(--blue); }
+        .faq-a { font-size: 0.88rem; color: var(--text-dim); line-height: 1.85; padding-bottom: 14px; display: none; }
+        .faq-item.open .faq-a { display: block; }
+        .privacy-wrap { max-width: 720px; }
+        .privacy-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-sm); transition: background 0.2s, border-color 0.2s; }
+        .privacy-card h1 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 6px; letter-spacing: -0.02em; }
+        .privacy-card .last-updated { font-size: 0.78rem; color: var(--text-faint); margin-bottom: 28px; }
+        .privacy-card h2 { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin: 24px 0 10px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .privacy-card h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+        .privacy-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.9; margin-bottom: 12px; }
+        .privacy-card ul { list-style: disc; padding-left: 20px; margin-bottom: 12px; }
+        .privacy-card ul li { font-size: 0.88rem; color: var(--text-dim); line-height: 1.85; padding: 2px 0; }
+        .privacy-card a { color: var(--blue); text-decoration: none; }
+        .privacy-card a:hover { text-decoration: underline; }
+        footer { background: var(--surface); border-top: 1px solid var(--border); padding: 20px 24px; transition: background 0.2s, border-color 0.2s; }
         .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .footer-inner span, .footer-inner a { font-size: 0.78rem; color: var(--text-faint); text-decoration: none; transition: color 0.15s; font-family: 'DM Sans', sans-serif; }
         .footer-inner a:hover { color: var(--blue); }
         .footer-links { display: flex; gap: 20px; align-items: center; }
-        .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text); color: #fff; font-size: 0.82rem; padding: 10px 18px; border-radius: 8px; box-shadow: var(--shadow-md); z-index: 999; opacity: 0; transform: translateY(8px); transition: opacity 0.2s, transform 0.2s; pointer-events: none; display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; }
+        .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text); color: var(--bg-gray); font-size: 0.82rem; padding: 10px 18px; border-radius: 8px; box-shadow: var(--shadow-md); z-index: 999; opacity: 0; transform: translateY(8px); transition: opacity 0.2s, transform 0.2s; pointer-events: none; display: flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; }
         .toast.show { opacity: 1; transform: translateY(0); }
         .toast i { color: #4ade80; }
+        .back-to-top { position: fixed; bottom: 28px; right: 24px; width: 40px; height: 40px; background: var(--blue); color: #fff; border: none; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(12px); transition: opacity 0.2s, transform 0.2s, background 0.15s; pointer-events: none; z-index: 998; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .back-to-top:hover { background: var(--blue-hover); }
         .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
         .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
-        .prev-versions-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-        .version-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; background: var(--bg-gray); }
-        .version-item:hover { border-color: var(--blue-border); background: var(--blue-light); }
-        .version-item-left { display: flex; flex-direction: column; gap: 2px; }
-        .version-item-ver { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text); font-weight: 500; }
-        .version-item-date { font-size: 0.72rem; color: var(--text-faint); }
-        .version-item-arrow { color: var(--text-faint); font-size: 0.8rem; transition: color 0.15s; }
-        .version-item:hover .version-item-arrow { color: var(--blue); }
     </style>
 </head>
 <body>
     <div class="toast" id="toast"><i class="fa-solid fa-check"></i> <span id="toast-msg"></span></div>
+    <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
     <nav>
         <div class="nav-inner">
-            <span class="logo" onclick="showPage('home')">
+            <a class="logo" href="#" onclick="showPage('home');return false;" aria-label="Java_nih_deks Home">
                 <div class="logo-icon"><i class="fa-solid fa-terminal"></i></div>
                 Java_nih_deks
-            </span>
+            </a>
             <div class="nav-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="nav-search-input" placeholder="Search releases..." autocomplete="off" oninput="handleSearch(this.value)">
+                <input type="text" id="nav-search-input" placeholder="Search releases..." autocomplete="off" oninput="handleSearch(this.value)" aria-label="Search releases">
             </div>
             <div class="nav-links">
                 <button class="nav-btn active" id="nav-home" onclick="showPage('home')"><i class="fa-solid fa-house"></i> Home</button>
                 <button class="nav-btn" id="nav-about" onclick="showPage('about')"><i class="fa-solid fa-circle-info"></i> About</button>
-                <a href="https://t.me/Java_diks" target="_blank" rel="noopener" class="nav-btn nav-tg"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://t.me/Java_diks" target="_blank" rel="noopener noreferrer" class="nav-btn nav-tg" aria-label="Telegram channel"><i class="fa-brands fa-telegram"></i></a>
+                <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()" aria-label="Toggle dark mode"><i class="fa-solid fa-moon" id="dark-icon"></i></button>
             </div>
         </div>
     </nav>
@@ -229,7 +277,7 @@
                     </div>
                 </div>
                 <div class="hero-right">
-                    <a href="https://t.me/Java_diks" target="_blank" rel="noopener" class="btn-primary"><i class="fa-brands fa-telegram"></i> Join Telegram</a>
+                    <a href="https://t.me/Java_diks" target="_blank" rel="noopener noreferrer" class="btn-primary"><i class="fa-brands fa-telegram"></i> Join Telegram</a>
                     <span style="font-size:0.75rem;color:var(--text-faint);text-align:right;">Get notified on new releases</span>
                 </div>
             </div>
@@ -239,14 +287,22 @@
             </div>
             <div class="mobile-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="mobile-search-input" placeholder="Search releases..." autocomplete="off" oninput="handleSearch(this.value)">
+                <input type="text" id="mobile-search-input" placeholder="Search releases..." autocomplete="off" oninput="handleSearch(this.value)" aria-label="Search releases">
             </div>
-            <div class="filter-bar">
-                <span style="font-size:0.8rem;color:var(--text-dim);margin-right:4px;">Filter:</span>
-                <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
-                <button class="filter-btn" onclick="filterCards('root',this)">Root</button>
-                <button class="filter-btn" onclick="filterCards('nonRoot',this)">Non-Root</button>
-                <button class="filter-btn" onclick="filterCards('module',this)">Module</button>
+            <div class="toolbar">
+                <div class="filter-bar">
+                    <span style="font-size:0.8rem;color:var(--text-dim);margin-right:4px;">Filter:</span>
+                    <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
+                    <button class="filter-btn" onclick="filterCards('root',this)">Root</button>
+                    <button class="filter-btn" onclick="filterCards('nonRoot',this)">Non-Root</button>
+                    <button class="filter-btn" onclick="filterCards('module',this)">Module</button>
+                </div>
+                <select class="sort-select" id="sort-select" onchange="applySort()" aria-label="Sort releases">
+                    <option value="default">Sort: Default</option>
+                    <option value="name-asc">Name A–Z</option>
+                    <option value="name-desc">Name Z–A</option>
+                    <option value="type">By Type</option>
+                </select>
             </div>
             <div id="module-grid"></div>
             <div id="no-results"><i class="fa-solid fa-magnifying-glass"></i>No releases found matching your search.</div>
@@ -262,7 +318,13 @@
                 <div id="updates-list"></div>
             </div>
         </div>
+
         <div id="detail-page" class="hidden page">
+            <nav aria-label="Breadcrumb" class="breadcrumb">
+                <a href="#" onclick="showPage('home');return false;"><i class="fa-solid fa-house"></i> Home</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span id="breadcrumb-title">Release</span>
+            </nav>
             <button class="back-btn" onclick="showPage('home')"><i class="fa-solid fa-arrow-left" style="font-size:0.7rem"></i> Back to Releases</button>
             <div class="detail-layout">
                 <div class="detail-main">
@@ -304,10 +366,6 @@
                             <button id="download-btn" class="btn-primary" onclick="startDownloadTimer()"><i class="fa-solid fa-download"></i> Download Release</button>
                             <p id="timer-note" class="timer-note hidden">Preparing download link...</p>
                         </div>
-                        <div id="prev-versions-container" class="hidden mt-6">
-                            <p class="sub-heading">Previous Versions</p>
-                            <div class="prev-versions-list" id="prev-versions-list"></div>
-                        </div>
                         <div class="ad-slot mt-8" style="height:180px;">
                             <ins class="adsbygoogle" style="display:block;width:100%;height:180px" data-ad-client="ca-pub-5565071752876543" data-ad-slot="AUTO" data-ad-format="autorelaxed"></ins>
                             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -319,6 +377,7 @@
                         <div class="sidebar-title" id="sb-info-title">App Information</div>
                         <div class="info-row"><span class="info-label">Version</span><span class="info-value blue" id="sb-version"></span></div>
                         <div class="info-row"><span class="info-label">Type</span><span class="info-value" id="sb-type"></span></div>
+                        <div class="info-row"><span class="info-label">Released</span><span class="info-value" id="sb-date"></span></div>
                         <div class="info-row"><span class="info-label">Price</span><span class="info-value" style="color:var(--green)">Free</span></div>
                         <div class="info-row"><span class="info-label">Platform</span><span class="info-value">Android</span></div>
                         <div class="info-row"><span class="info-label">Developer</span><span class="info-value" id="sb-developer"></span></div>
@@ -341,6 +400,7 @@
                 </div>
             </div>
         </div>
+
         <div id="about-page" class="hidden page about-wrap">
             <div style="margin-bottom:20px;">
                 <h1 style="font-family:'Montserrat',sans-serif;font-size:clamp(1.4rem,4vw,1.9rem);font-weight:800;color:var(--text);letter-spacing:-0.02em;margin-bottom:6px;">About</h1>
@@ -354,25 +414,83 @@
             <div class="about-card">
                 <h2>What is Shizuku?</h2>
                 <p><strong>Shizuku</strong> is an open-source Android tool that allows apps to use system APIs directly with elevated permissions — without requiring full root access. This means many performance tweaks can be applied on stock, unrooted devices.</p>
-                <p>It works by running a privileged process via ADB or the built-in feature available on some devices (Android 11+).</p>
+                <p>It works by running a privileged process via ADB or the built-in feature available on some devices (Android 11+). This makes it a safer alternative to full root for users who only need selective system-level access.</p>
+            </div>
+            <div class="about-card">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Are all tools completely free?<i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-a">Yes. Every tool and module released on this site is completely free of charge. There are no premium tiers, no subscriptions, and no paywalls. The site is ad-supported to help cover hosting costs.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Do I need root to use these tools?<i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-a">Not always. Many features work on non-rooted devices via Shizuku. However, some advanced features — such as thermal throttle control and deep performance profiling — do require root access. Each release page clearly lists what's supported for Root vs. Non-Root.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">What is the difference between a Module and an App?<i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-a">An <strong>App</strong> is a standard APK you install and run directly on your device. A <strong>Module</strong> is a Magisk/KernelSU/AxManager package that is flashed into the system and runs in the background without a visible UI. Modules are generally for root users only.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Is it safe to use these tools?<i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-a">All tools are tested on real devices before release. That said, system-level modifications carry inherent risks — especially on rooted devices. Always read the Developer Notes on each release page before installing. Creating a backup before flashing any module is strongly recommended.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Where can I get support or report a bug?<i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-a">The best place for support, bug reports, and community discussion is the official Telegram channel. You can join via the link in the navigation bar or the button below.</div>
+                </div>
+            </div>
+            <div class="about-card">
+                <h2>Disclaimer</h2>
+                <p>All tools provided on this site are for educational and personal use only. Modifying your Android system may void your warranty and, if done incorrectly, could cause device instability. The developer is not responsible for any damage or data loss resulting from the use of these tools. Proceed at your own risk.</p>
             </div>
             <div class="about-card">
                 <h2>Contact &amp; Community</h2>
                 <p>For updates, support, and discussions, join the Telegram channel.</p>
-                <a href="https://t.me/Java_diks" target="_blank" rel="noopener" class="connect-btn"><i class="fa-brands fa-telegram"></i> t.me/Java_diks</a>
+                <a href="https://t.me/Java_diks" target="_blank" rel="noopener noreferrer" class="connect-btn"><i class="fa-brands fa-telegram"></i> t.me/Java_diks</a>
+            </div>
+        </div>
+
+        <div id="privacy-page" class="hidden page privacy-wrap">
+            <div class="privacy-card">
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Last updated: March 11, 2026</p>
+                <h2>1. Introduction</h2>
+                <p>Welcome to Java_nih_deks ("we", "our", or "this website"). This Privacy Policy explains how we handle information when you visit <strong>sorumstylxjava.github.io</strong>. We are committed to protecting your privacy and being transparent about our practices.</p>
+                <h2>2. Information We Do Not Collect</h2>
+                <p>This website does not require you to create an account, sign in, or provide any personal information. We do not collect, store, or process any personally identifiable information (PII) directly.</p>
+                <h2>3. Third-Party Advertising (Google AdSense)</h2>
+                <p>This website uses <strong>Google AdSense</strong> to display advertisements. Google AdSense may use cookies and similar tracking technologies to serve personalized ads based on your browsing history and interests. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to this and other websites.</p>
+                <ul>
+                    <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</li>
+                    <li>You can also opt out via the <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer">Network Advertising Initiative opt-out page</a>.</li>
+                    <li>For more information, see <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google's advertising privacy policies</a>.</li>
+                </ul>
+                <h2>4. Cookies</h2>
+                <p>We do not set cookies ourselves. However, third-party services (such as Google AdSense and Google Fonts) may set cookies on your browser. These cookies are governed by the respective third parties' privacy policies.</p>
+                <h2>5. External Links</h2>
+                <p>This website contains links to external services such as Telegram, GitHub, and Google Drive. We are not responsible for the privacy practices or content of those external sites. We recommend reviewing their privacy policies before sharing any personal information.</p>
+                <h2>6. Children's Privacy</h2>
+                <p>This website is not directed at children under the age of 13. We do not knowingly collect any personal information from children. If you believe a child has provided personal information, please contact us so we can take appropriate action.</p>
+                <h2>7. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated "Last updated" date. Continued use of the website after changes constitutes your acceptance of the revised policy.</p>
+                <h2>8. Contact</h2>
+                <p>For any questions about this Privacy Policy, please contact us via our <a href="https://t.me/Java_diks" target="_blank" rel="noopener noreferrer">Telegram channel</a>.</p>
             </div>
         </div>
     </main>
+
     <footer>
         <div class="footer-inner">
             <span>&copy; 2026 Java_nih_deks. All rights reserved.</span>
             <div class="footer-links">
                 <span>Android System Tools</span>
-                <a href="https://t.me/Java_diks" target="_blank" rel="noopener">Telegram</a>
+                <a href="https://t.me/Java_diks" target="_blank" rel="noopener noreferrer">Telegram</a>
                 <a href="#" onclick="showPage('about');return false;">About</a>
+                <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>
             </div>
         </div>
     </footer>
+
     <script>
         const modulesData = [
             {
@@ -386,13 +504,12 @@
                 bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/IMG_20260311_092033_320.jpg',
                 shortDesc: 'Advanced performance application for Android system optimization. Supports both Root and Non-Root execution via Shizuku integration.',
                 icon: 'fa-microchip',
-                previousVersions: [{"version": "v8.2", "date": "jan 31,2026", "downloadLink": "https://sfl.gl/vdKhNh", "features": ["FPS Monitor (Root)", "CPU Info", "Non-Root Support via Shizuku", "Downscale (Root & Non-Root)", "Graphics Driver Override", "Performance Profile (Root)", "Smart Cache Cleaner", "Background App Killer", "GPU 2D Render Mode", "Scale Animation Control", "IO Scheduler Tuning", "VM Memory Tweak", "TCP Low Latency", "Lock FPS", "GameBoost Tab"]}],
                 compatibility: [
-                    { label: 'Android 8.0+',       supported: true  },
-                    { label: 'Root Support',        supported: true  },
-                    { label: 'Shizuku (Non-Root)',  supported: true  },
-                    { label: 'ARM & ARM64',         supported: true  },
-                    { label: 'x86 / x86_64',        supported: false }
+                    { label: 'Android 8.0+',      supported: true  },
+                    { label: 'Root Support',       supported: true  },
+                    { label: 'Shizuku (Non-Root)', supported: true  },
+                    { label: 'ARM & ARM64',        supported: true  },
+                    { label: 'x86 / x86_64',       supported: false }
                 ],
                 features: [
                     'FPS Monitor (Root)', 'CPU Info', 'Refreshed UI', 'Non-Root Support via Shizuku',
@@ -429,10 +546,14 @@
                 bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/df8830209656435.6793ae5005fc9.webp',
                 shortDesc: 'Advanced performance module for Android system optimization. Supports both Root and Non-Root.',
                 icon: 'fa-layer-group',
-                previousVersions: [],
-                features: [
-                    'Smooth rendering on rooted and non-rooted devices'
+                compatibility: [
+                    { label: 'Android 8.0+',      supported: true  },
+                    { label: 'Root Support',       supported: true  },
+                    { label: 'Shizuku (Non-Root)', supported: true  },
+                    { label: 'ARM & ARM64',        supported: true  },
+                    { label: 'x86 / x86_64',       supported: false }
                 ],
+                features: ['Smooth rendering on rooted and non-rooted devices'],
                 notes: [],
                 credits: [],
                 specialThanks: '',
@@ -445,65 +566,87 @@
                 ],
                 downloadLink: 'https://sfl.gl/kRCnrk'
             },
-
             {
                 id: 'bleble-potion',
-                title: 'Bleble Pition',
+                title: 'Bleble Potion',
                 version: '1.8',
                 type: 'Module',
                 tags: ['nonRoot', 'AxManager', 'module'],
-                status: 'latest Release',
-                date: 'mar 11,2026',
+                status: 'Latest Release',
+                date: 'Mar 11, 2026',
                 bannerImg: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d8a9e2209656435.6735af787aa28.png',
-                shortDesc: 'Blebleble potions is a plugin that contains a lots of tweak tools such as potion (disable tracing,stop some logging,stop some profiling), setprop tweaks',
+                shortDesc: 'A plugin module containing a suite of tweak tools — disable tracing, stop logging, stop profiling, and setprop tweaks for performance improvement.',
                 icon: 'fa-rocket',
-                previousVersions: [],
                 developer: '@AduhaiWelewele',
                 compatibility: [
-                    { label: 'Android 8.0+',       supported: true  },
-                    { label: 'Root Support',        supported: true  },
-                    { label: 'Shizuku (Non-Root)',  supported: true  },
-                    { label: 'ARM & ARM64',         supported: true  },
-                    { label: 'x86 / x86_64',        supported: false },
+                    { label: 'Android 8.0+',      supported: true  },
+                    { label: 'Root Support',       supported: true  },
+                    { label: 'Shizuku (Non-Root)', supported: true  },
+                    { label: 'ARM & ARM64',        supported: true  },
+                    { label: 'x86 / x86_64',       supported: false }
                 ],
-                features: ['downscale cli', 'disable tracing', 'minimize log', 'set surfaceflinger as realtime performance'],
+                features: ['Downscale CLI', 'Disable Tracing', 'Minimize Logging', 'SurfaceFlinger Realtime Performance'],
                 notes: [],
                 credits: [],
                 specialThanks: '',
-                install: ['Download module', 'open AxManager then install from storage', 'wait flashing done'],
+                install: [
+                    'Download the module file.',
+                    'Open AxManager, then select Install from Storage.',
+                    'Wait for flashing to complete.'
+                ],
                 downloadLink: 'https://drive.google.com/drive/folders/1wNVs5ImjlrsAJ_VPfVsDXWwbzcW1oZW2'
             },
-
             {
                 id: 'M412Cat',
                 title: 'Utensil Poker',
                 version: 'Stable',
                 type: 'Module',
                 tags: ['nonRoot', 'AxManager', 'module'],
-                status: 'Stable release',
-                date: 'mar 11,2026',
+                status: 'Stable Release',
+                date: 'Mar 11, 2026',
                 bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/IMG_20260311_222509_916.jpg',
-                shortDesc: 'A Simple File Designed For Trigger Power Saver Based On',
+                shortDesc: 'A lightweight module designed to intelligently trigger Power Saver mode based on system conditions, helping extend battery life.',
                 icon: 'fa-gear',
-                previousVersions: [],
                 developer: '@Dcx400',
                 compatibility: [
-                    { label: 'Android 8.0+',       supported: true  },
-                    { label: 'Root Support',        supported: true  },
-                    { label: 'Shizuku (Non-Root)',  supported: true  },
-                    { label: 'ARM & ARM64',         supported: true  },
-                    { label: 'x86 / x86_64',        supported: false },
+                    { label: 'Android 8.0+',      supported: true  },
+                    { label: 'Root Support',       supported: true  },
+                    { label: 'Shizuku (Non-Root)', supported: true  },
+                    { label: 'ARM & ARM64',        supported: true  },
+                    { label: 'x86 / x86_64',       supported: false }
                 ],
-                features: ['battery saving module'],
+                features: ['Intelligent Power Saver Trigger', 'Battery Life Extension'],
                 notes: [],
                 credits: [],
                 specialThanks: '',
-                install: ['Download module', 'open AxManager then install from storage', 'And wait until the flashing process is complete'],
+                install: [
+                    'Download the module file.',
+                    'Open AxManager, then select Install from Storage.',
+                    'Wait until the flashing process is complete.'
+                ],
                 downloadLink: 'https://t.me/archiverdcx/127'
-            },
+            }
         ];
 
         let currentMod = null;
+        let activeFilter = 'all';
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('dark-icon').className = 'fa-solid fa-sun';
+        }
+
+        function toggleDark() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('dark-icon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 300);
+        });
 
         window.onload = () => {
             renderHome(modulesData);
@@ -511,13 +654,27 @@
             document.getElementById('stat-releases').textContent = modulesData.length;
         };
 
+        function getSortedData(data) {
+            const sort = document.getElementById('sort-select').value;
+            const arr = [...data];
+            if (sort === 'name-asc')  arr.sort((a, b) => a.title.localeCompare(b.title));
+            else if (sort === 'name-desc') arr.sort((a, b) => b.title.localeCompare(a.title));
+            else if (sort === 'type') arr.sort((a, b) => a.type.localeCompare(b.type));
+            return arr;
+        }
+
+        function applySort() {
+            const base = activeFilter === 'all' ? modulesData : modulesData.filter(m => m.tags.includes(activeFilter));
+            renderHome(base);
+        }
+
         function renderHome(data) {
             const grid  = document.getElementById('module-grid');
             const noRes = document.getElementById('no-results');
             grid.innerHTML = '';
             if (!data.length) { noRes.style.display = 'block'; grid.style.display = 'none'; return; }
             noRes.style.display = 'none'; grid.style.display = '';
-            data.forEach(mod => {
+            getSortedData(data).forEach(mod => {
                 const card = document.createElement('div');
                 card.className = 'module-card';
                 card.setAttribute('role', 'button');
@@ -526,9 +683,7 @@
                 card.setAttribute('aria-label', `View ${mod.title} ${mod.version}`);
                 card.onclick   = () => openDetail(mod.id);
                 card.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') openDetail(mod.id); };
-                const tagBadges = mod.tags.map(t =>
-                    `<span class="badge badge-tag">${t}</span>`
-                ).join('');
+                const tagBadges = mod.tags.map(t => `<span class="badge badge-tag">${t}</span>`).join('');
                 card.innerHTML = `
                     <div class="card-top">
                         <div class="card-icon-wrap"><i class="fa-solid ${mod.icon}"></i></div>
@@ -536,6 +691,7 @@
                     </div>
                     <div class="card-title">${mod.title}<span class="card-version">${mod.version}</span></div>
                     <p class="card-desc">${mod.shortDesc}</p>
+                    <div class="card-date"><i class="fa-regular fa-calendar"></i>${mod.date}</div>
                     <div class="card-footer">
                         <div class="card-meta">${tagBadges}</div>
                         <div class="card-cta">View <i class="fa-solid fa-arrow-right" style="font-size:0.65rem"></i></div>
@@ -559,6 +715,7 @@
         function filterCards(tag, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            activeFilter = tag;
             document.getElementById('nav-search-input').value    = '';
             document.getElementById('mobile-search-input').value = '';
             if (tag === 'all') { renderHome(modulesData); return; }
@@ -643,25 +800,6 @@
         function openDetail(id) {
             const mod = modulesData.find(m => m.id === id);
             if (!mod) return;
-            openDetailWithMod(mod, null);
-        }
-
-        function openPrevVersion(parentId, idx) {
-            const parent = modulesData.find(m => m.id === parentId);
-            if (!parent) return;
-            const prev = parent.previousVersions[idx];
-            if (!prev) return;
-            openDetailWithMod(Object.assign({}, parent, {
-                version: prev.version,
-                date: prev.date,
-                downloadLink: prev.downloadLink,
-                features: prev.features && prev.features.length ? prev.features : parent.features,
-                status: 'Previous Release',
-                previousVersions: []
-            }), parentId);
-        }
-
-        function openDetailWithMod(mod, parentId) {
             currentMod = mod;
             const btn = document.getElementById('download-btn');
             btn.disabled  = false;
@@ -669,16 +807,18 @@
             btn.onclick   = startDownloadTimer;
             document.getElementById('timer-note').classList.add('hidden');
             loadBanner(mod);
-            document.getElementById('detail-title').textContent      = mod.title;
-            document.getElementById('detail-version').textContent    = mod.version;
-            document.getElementById('detail-type').textContent       = mod.type;
-            document.getElementById('detail-status').textContent     = mod.status;
-            document.getElementById('detail-short-desc').textContent = mod.shortDesc;
-            document.getElementById('sb-version').textContent        = mod.version;
-            document.getElementById('sb-type').textContent           = mod.type;
-            document.getElementById('sb-developer').textContent      = mod.developer || 'Java_nih_deks';
-            document.getElementById('sb-info-title').textContent     = mod.type === 'Module' ? 'Module Information' : 'App Information';
-            document.getElementById('detail-features').innerHTML     = mod.features.map(f => `<li><i class="fa-solid fa-check"></i>${f}</li>`).join('');
+            document.getElementById('breadcrumb-title').textContent     = mod.title;
+            document.getElementById('detail-title').textContent         = mod.title;
+            document.getElementById('detail-version').textContent       = mod.version;
+            document.getElementById('detail-type').textContent          = mod.type;
+            document.getElementById('detail-status').textContent        = mod.status;
+            document.getElementById('detail-short-desc').textContent    = mod.shortDesc;
+            document.getElementById('sb-version').textContent           = mod.version;
+            document.getElementById('sb-type').textContent              = mod.type;
+            document.getElementById('sb-date').textContent              = mod.date;
+            document.getElementById('sb-developer').textContent         = mod.developer || 'Java_nih_deks';
+            document.getElementById('sb-info-title').textContent        = mod.type === 'Module' ? 'Module Information' : 'App Information';
+            document.getElementById('detail-features').innerHTML        = mod.features.map(f => `<li><i class="fa-solid fa-check"></i>${f}</li>`).join('');
             const nc = document.getElementById('notes-container');
             if (mod.notes?.length) { nc.classList.remove('hidden'); document.getElementById('detail-notes').innerHTML = mod.notes.map(n => `<li>${n}</li>`).join(''); }
             else { nc.classList.add('hidden'); }
@@ -691,27 +831,16 @@
             document.getElementById('detail-install').innerHTML = mod.install.map(s => `<li>${s}</li>`).join('');
             document.getElementById('sb-compat').innerHTML = (mod.compatibility || []).map(c => `
                 <li><i class="fa-solid ${c.supported ? 'fa-circle-check' : 'fa-circle-xmark'} ${c.supported ? '' : 'no'}"></i>${c.label}</li>`).join('');
-            const pvc = document.getElementById('prev-versions-container');
-            const pvl = document.getElementById('prev-versions-list');
-            const prevs = mod.previousVersions || [];
-            if (prevs.length) {
-                pvc.classList.remove('hidden');
-                const pid = parentId || mod.id;
-                pvl.innerHTML = prevs.map((p, i) => `
-                    <div class="version-item" onclick="openPrevVersion('${pid}', ${i})">
-                        <div class="version-item-left">
-                            <span class="version-item-ver">${p.version}</span>
-                            <span class="version-item-date">${p.date}</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-right version-item-arrow"></i>
-                    </div>`).join('');
-            } else { pvc.classList.add('hidden'); }
             showPage('detail');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function toggleFaq(el) {
+            el.closest('.faq-item').classList.toggle('open');
+        }
+
         function showPage(pageId) {
-            ['home', 'detail', 'about'].forEach(p => document.getElementById(`${p}-page`).classList.add('hidden'));
+            ['home', 'detail', 'about', 'privacy'].forEach(p => document.getElementById(`${p}-page`).classList.add('hidden'));
             document.getElementById(`${pageId}-page`).classList.remove('hidden');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             const activeNav = document.getElementById(`nav-${pageId}`);
