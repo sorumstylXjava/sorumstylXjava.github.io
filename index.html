@@ -68,6 +68,7 @@
         .badge-green  { color: var(--green);   background: var(--green-light);  border-color: var(--green-border); }
         .badge-gray   { color: var(--text-dim); background: var(--bg-gray);     border-color: var(--border); }
         .badge-yellow { color: var(--yellow);  background: var(--yellow-light); border-color: #fde68a; }
+        .badge-tag    { color: var(--text-dim); background: var(--bg-gray);     border-color: var(--border); }
         .hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; box-shadow: var(--shadow-sm); }
         .hero-left { flex: 1; }
         .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; }
@@ -186,6 +187,14 @@
         .toast i { color: #4ade80; }
         .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
         .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+        .prev-versions-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+        .version-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; background: var(--bg-gray); }
+        .version-item:hover { border-color: var(--blue-border); background: var(--blue-light); }
+        .version-item-left { display: flex; flex-direction: column; gap: 2px; }
+        .version-item-ver { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text); font-weight: 500; }
+        .version-item-date { font-size: 0.72rem; color: var(--text-faint); }
+        .version-item-arrow { color: var(--text-faint); font-size: 0.8rem; transition: color 0.15s; }
+        .version-item:hover .version-item-arrow { color: var(--blue); }
     </style>
 </head>
 <body>
@@ -211,7 +220,6 @@
         <div id="home-page" class="page">
             <div class="hero">
                 <div class="hero-left">
-                    <div class="mb-4"><span class="badge badge-blue"><i class="fa-solid fa-circle" style="font-size:0.45rem"></i> Active Development</span></div>
                     <h1 class="hero-title">Android Performance<br>Tools &amp; Releases</h1>
                     <p class="hero-desc">Official repository for system modification apps and performance tools. All projects support Root and Non-Root via Shizuku.</p>
                     <div class="hero-stats">
@@ -237,7 +245,7 @@
                 <span style="font-size:0.8rem;color:var(--text-dim);margin-right:4px;">Filter:</span>
                 <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
                 <button class="filter-btn" onclick="filterCards('root',this)">Root</button>
-                <button class="filter-btn" onclick="filterCards('shizuku',this)">Shizuku</button>
+                <button class="filter-btn" onclick="filterCards('nonRoot',this)">Non-Root</button>
                 <button class="filter-btn" onclick="filterCards('module',this)">Module</button>
             </div>
             <div id="module-grid"></div>
@@ -295,6 +303,10 @@
                         <div class="download-wrap">
                             <button id="download-btn" class="btn-primary" onclick="startDownloadTimer()"><i class="fa-solid fa-download"></i> Download Release</button>
                             <p id="timer-note" class="timer-note hidden">Preparing download link...</p>
+                        </div>
+                        <div id="prev-versions-container" class="hidden mt-6">
+                            <p class="sub-heading">Previous Versions</p>
+                            <div class="prev-versions-list" id="prev-versions-list"></div>
                         </div>
                         <div class="ad-slot mt-8" style="height:180px;">
                             <ins class="adsbygoogle" style="display:block;width:100%;height:180px" data-ad-client="ca-pub-5565071752876543" data-ad-slot="AUTO" data-ad-format="autorelaxed"></ins>
@@ -368,12 +380,13 @@
                 title: 'XianTian Pro',
                 version: 'v8.3',
                 type: 'App',
-                tags: ['root', 'shizuku'],
+                tags: ['root', 'nonRoot'],
                 status: 'Latest Release',
                 date: 'Mar 11, 2026',
                 bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/IMG_20260311_092033_320.jpg',
                 shortDesc: 'Advanced performance application for Android system optimization. Supports both Root and Non-Root execution via Shizuku integration.',
                 icon: 'fa-microchip',
+                previousVersions: [],
                 compatibility: [
                     { label: 'Android 8.0+',       supported: true  },
                     { label: 'Root Support',        supported: true  },
@@ -416,13 +429,7 @@
                 bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/df8830209656435.6793ae5005fc9.webp',
                 shortDesc: 'Advanced performance module for Android system optimization. Supports both Root and Non-Root.',
                 icon: 'fa-layer-group',
-                compatibility: [
-                    { label: 'Android 8.0+',       supported: true  },
-                    { label: 'Root Support',        supported: true  },
-                    { label: 'Shizuku (Non-Root)',  supported: true  },
-                    { label: 'ARM & ARM64',         supported: true  },
-                    { label: 'x86 / x86_64',        supported: false }
-                ],
+                previousVersions: [],
                 features: [
                     'Smooth rendering on rooted and non-rooted devices'
                 ],
@@ -450,6 +457,7 @@
                 bannerImg: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d8a9e2209656435.6735af787aa28.png',
                 shortDesc: 'Blebleble potions is a plugin that contains a lots of tweak tools such as potion (disable tracing,stop some logging,stop some profiling), setprop tweaks',
                 icon: 'fa-rocket',
+                previousVersions: [],
                 developer: '@AduhaiWelewele',
                 compatibility: [
                     { label: 'Android 8.0+',       supported: true  },
@@ -477,6 +485,7 @@
                 bannerImg: 'https://raw.githubusercontent.com/sorumstylXjava/Bug/refs/heads/main/IMG_20260311_222509_916.jpg',
                 shortDesc: 'A Simple File Designed For Trigger Power Saver Based On',
                 icon: 'fa-gear',
+                previousVersions: [],
                 developer: '@Dcx400',
                 compatibility: [
                     { label: 'Android 8.0+',       supported: true  },
@@ -518,7 +527,7 @@
                 card.onclick   = () => openDetail(mod.id);
                 card.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') openDetail(mod.id); };
                 const tagBadges = mod.tags.map(t =>
-                    `<span class="badge ${t==='root'?'badge-yellow':t==='shizuku'?'badge-blue':t==='module'?'badge-green':'badge-gray'}">${t}</span>`
+                    `<span class="badge badge-tag">${t}</span>`
                 ).join('');
                 card.innerHTML = `
                     <div class="card-top">
@@ -634,6 +643,22 @@
         function openDetail(id) {
             const mod = modulesData.find(m => m.id === id);
             if (!mod) return;
+            openDetailWithMod(mod, null);
+        }
+
+        function openPrevVersion(parentId, prev) {
+            const parent = modulesData.find(m => m.id === parentId);
+            if (!parent) return;
+            openDetailWithMod(Object.assign({}, parent, {
+                version: prev.version,
+                date: prev.date,
+                downloadLink: prev.downloadLink,
+                status: 'Previous Release',
+                previousVersions: []
+            }), parentId);
+        }
+
+        function openDetailWithMod(mod, parentId) {
             currentMod = mod;
             const btn = document.getElementById('download-btn');
             btn.disabled  = false;
@@ -663,6 +688,21 @@
             document.getElementById('detail-install').innerHTML = mod.install.map(s => `<li>${s}</li>`).join('');
             document.getElementById('sb-compat').innerHTML = (mod.compatibility || []).map(c => `
                 <li><i class="fa-solid ${c.supported ? 'fa-circle-check' : 'fa-circle-xmark'} ${c.supported ? '' : 'no'}"></i>${c.label}</li>`).join('');
+            const pvc = document.getElementById('prev-versions-container');
+            const pvl = document.getElementById('prev-versions-list');
+            const prevs = mod.previousVersions || [];
+            if (prevs.length) {
+                pvc.classList.remove('hidden');
+                const pid = parentId || mod.id;
+                pvl.innerHTML = prevs.map(p => `
+                    <div class="version-item" onclick="openPrevVersion('${pid}', ${JSON.stringify(p).replace(/'/g, '&#39;')})">
+                        <div class="version-item-left">
+                            <span class="version-item-ver">${p.version}</span>
+                            <span class="version-item-date">${p.date}</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right version-item-arrow"></i>
+                    </div>`).join('');
+            } else { pvc.classList.add('hidden'); }
             showPage('detail');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
