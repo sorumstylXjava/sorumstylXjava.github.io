@@ -7,8 +7,6 @@
     <meta name="description" content="Free Android performance tools and system modification downloads. Supports Root and Non-Root via Shizuku. Official release hub by Java_nih_deks.">
     <meta name="keywords" content="android tweak, android performance, shizuku, root android, system optimization, apk, fps boost, android tools free, magisk module, kernelsu">
     <meta name="author" content="Java_nih_deks">
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,10 +18,8 @@
     <meta property="og:title" content="Java_nih_deks — Android System Tweaks & Performance Tools">
     <meta property="og:description" content="Free Android performance tools. Root & Non-Root support.">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5565071752876543" crossorigin="anonymous"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -809,13 +805,12 @@
         function startDownloadTimer(btn) {
             if (btn.disabled) return;
             btn.disabled = true;
-            
+
             let timeLeft = 15;
-            
-            // Remove hover effects while disabled
+
             btn.classList.remove('hover:-translate-y-1', 'hover:from-blue-600', 'hover:to-violet-600');
             btn.classList.add('opacity-80', 'cursor-not-allowed');
-            
+
             btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin text-xl"></i> <span class="font-mono text-lg ml-2">${timeLeft}s</span> <span class="ml-1 text-sm font-normal">Wait...</span>`;
 
             timerInterval = setInterval(() => {
@@ -823,11 +818,15 @@
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
                     btn.innerHTML = `<i class="fa-solid fa-check-double text-xl"></i> <span class="ml-2">Redirecting...</span>`;
-                    
-                    // Open link
-                    window.open(currentDownloadUrl, '_blank');
-                    
-                    // Reset button after redirect
+
+                    const a = document.createElement('a');
+                    a.href = currentDownloadUrl;
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
                     setTimeout(() => {
                         resetDownloadButton();
                     }, 2000);
