@@ -222,7 +222,7 @@
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6 bg-darkcard/50 rounded-2xl p-3 border border-slate-800">
                 <div class="relative flex-1">
                     <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i>
-                    <input type="text" id="nav-search-input" placeholder="Search modules or apps..." onkeyup="syncSearch(this.value)"
+                    <input type="text" id="home-search-input" placeholder="Search modules or apps..." onkeyup="syncSearch(this.value)"
                            class="w-full pl-9 pr-4 py-2.5 bg-slate-800 text-slate-100 placeholder-slate-500 border border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none transition-all">
                 </div>
                 <div class="flex gap-2 flex-wrap sm:flex-nowrap">
@@ -583,8 +583,7 @@
                     'Wait until the flashing process is complete.'
                 ],
                 downloadLink: 'https://t.me/archiverdcx/127'
-            }
-        
+            },
             {
                 id: 'TianYun',
                 title: 'TianYun狗',
@@ -649,8 +648,10 @@
             if (pageId === 'home') {
                 const d = document.getElementById('nav-search-input');
                 const m = document.getElementById('nav-search-input-mobile');
+                const h = document.getElementById('home-search-input');
                 if (d) d.value = '';
                 if (m) m.value = '';
+                if (h) h.value = '';
                 currentSearch = '';
                 renderHome();
             }
@@ -723,8 +724,10 @@
             currentSearch = val.toLowerCase();
             const d = document.getElementById('nav-search-input');
             const m = document.getElementById('nav-search-input-mobile');
+            const h = document.getElementById('home-search-input');
             if (d && d.value !== val) d.value = val;
             if (m && m.value !== val) m.value = val;
+            if (h && h.value !== val) h.value = val;
             if (document.getElementById('home-page').classList.contains('hidden-page')) {
                 showPage('home');
             } else {
